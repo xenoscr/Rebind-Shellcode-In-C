@@ -31,6 +31,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -72,25 +73,72 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <ExtensionsToDeleteOnClean>*.bin;*.map;*.cdf;*.cache;*.obj;*.obj.enc;*.ilk;*.ipdb;*.iobj;*.resources;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.tlog;*.manifest;*.res;*.pch;*.exp;*.idb;*.rep;*.xdc;*.pdb;*_manifest.rc;*.bsc;*.sbr;*.xml;*.metagen;*.bi</ExtensionsToDeleteOnClean>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
+    <LinkIncremental>
+    </LinkIncremental>
+    <ExtensionsToDeleteOnClean>*.bin;*.map;*.cdf;*.cache;*.obj;*.obj.enc;*.ilk;*.ipdb;*.iobj;*.resources;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.tlog;*.manifest;*.res;*.pch;*.exp;*.idb;*.rep;*.xdc;*.pdb;*_manifest.rc;*.bsc;*.sbr;*.xml;*.metagen;*.bi</ExtensionsToDeleteOnClean>
+    <IgnoreImportLibrary />
+    <GenerateManifest />
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MinSpace</Optimization>
+      <SDLCheck>
+      </SDLCheck>
+      <PreprocessorDefinitions>
+      </PreprocessorDefinitions>
+      <ConformanceMode>
+      </ConformanceMode>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <TreatWarningAsError />
+      <InlineFunctionExpansion />
+      <IntrinsicFunctions />
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <OmitFramePointers />
+      <EnableFiberSafeOptimizations />
+      <UndefineAllPreprocessorDefinitions />
+      <IgnoreStandardIncludePath />
+      <PreprocessToFile />
+      <PreprocessSuppressLineNumbers />
+      <PreprocessKeepComments />
+      <MinimalRebuild />
+      <ExceptionHandling />
+      <SmallerTypeCheck />
+      <BasicRuntimeChecks />
+      <RuntimeLibrary />
+      <StructMemberAlignment />
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet />
+      <FloatingPointModel />
+      <TreatWChar_tAsBuiltInType />
+      <ForceConformanceInForLoopScope />
+      <PrecompiledHeaderOutputFile />
+      <ExpandAttributedSource />
+      <AssemblerOutput>AssemblyCode</AssemblerOutput>
+      <ProgramDataBaseFileName />
+      <GenerateXMLDocumentationFiles />
+      <BrowseInformation />
+      <CallingConvention />
+      <CompileAs>CompileAsC</CompileAs>
+      <ShowIncludes />
+      <UseFullPaths />
+      <OmitDefaultLibName>true</OmitDefaultLibName>
+      <ErrorReporting />
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -114,22 +162,109 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MinSpace</Optimization>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
+      <IntrinsicFunctions>
+      </IntrinsicFunctions>
+      <SDLCheck>
+      </SDLCheck>
+      <PreprocessorDefinitions>
+      </PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <TreatWarningAsError />
+      <InlineFunctionExpansion />
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <OmitFramePointers />
+      <EnableFiberSafeOptimizations />
+      <UndefineAllPreprocessorDefinitions />
+      <IgnoreStandardIncludePath />
+      <PreprocessToFile />
+      <PreprocessSuppressLineNumbers />
+      <PreprocessKeepComments />
+      <MinimalRebuild />
+      <ExceptionHandling />
+      <SmallerTypeCheck />
+      <BasicRuntimeChecks />
+      <RuntimeLibrary />
+      <StructMemberAlignment />
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet />
+      <FloatingPointModel />
+      <DisableLanguageExtensions />
+      <TreatWChar_tAsBuiltInType />
+      <ForceConformanceInForLoopScope />
+      <PrecompiledHeaderOutputFile />
+      <ExpandAttributedSource />
+      <AssemblerOutput>AssemblyCode</AssemblerOutput>
+      <ProgramDataBaseFileName />
+      <GenerateXMLDocumentationFiles />
+      <BrowseInformation />
+      <CallingConvention />
+      <CompileAs>CompileAsC</CompileAs>
+      <ShowIncludes />
+      <UseFullPaths />
+      <OmitDefaultLibName>true</OmitDefaultLibName>
+      <ErrorReporting />
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>
+      </GenerateDebugInformation>
+      <ShowProgress />
+      <RegisterOutput />
+      <PerUserRedirection />
+      <AdditionalDependencies />
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <ManifestFile />
+      <AllowIsolation />
+      <EnableUAC />
+      <UACExecutionLevel />
+      <UACUIAccess />
+      <ProgramDatabaseFile />
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapExports />
+      <SwapRunFromCD />
+      <SwapRunFromNET />
+      <FunctionOrder>function_link_order.txt</FunctionOrder>
+      <ProfileGuidedDatabase />
+      <IgnoreEmbeddedIDL />
+      <TypeLibraryResourceID />
+      <EntryPointSymbol>StartHere</EntryPointSymbol>
+      <NoEntryPoint />
+      <RandomizedBaseAddress />
+      <DataExecutionPrevention />
+      <TurnOffAssemblyGeneration />
+      <Profile />
+      <LinkErrorReporting />
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <ProjectReference>
+      <UseLibraryDependencyInputs />
+    </ProjectReference>
+    <Manifest>
+      <SuppressStartupBanner />
+    </Manifest>
+    <Manifest>
+      <VerboseOutput />
+    </Manifest>
+    <PostBuildEvent>
+      <Command>powershell.exe -NoProfile -ExecutionPolicy Bypass -File $(SolutionDir)lib\PowerShell\Out-Shellcode.ps1 $(OutDir)$(TargetName)$(TargetExt) $(ProjectDir) $(OutDir)$(TargetName).map $(OutDir)$(TargetName)_shellcode.bin</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Extract position independent shellcode</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -151,16 +286,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h" />
+    <ClInclude Include="64BitHelper.h" />
+    <ClInclude Include="GetProcAddressWithHash.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Rebind-Shellcode-From-C.cpp" />
+    <ClCompile Include="rebind.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AdjustStack.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

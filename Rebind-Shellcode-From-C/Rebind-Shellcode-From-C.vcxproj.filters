@@ -15,16 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="64BitHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GetProcAddressWithHash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="rebind.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Rebind-Shellcode-From-C.cpp">
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AdjustStack.asm">
       <Filter>Source Files</Filter>
-    </ClCompile>
+    </None>
   </ItemGroup>
 </Project>
