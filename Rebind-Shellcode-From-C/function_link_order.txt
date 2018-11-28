@@ -1,2 +1,4 @@
+StartHere
 ExecutePayload
 GetProcAddressWithHash
+forkProcess

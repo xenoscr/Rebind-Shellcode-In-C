@@ -88,7 +88,12 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
+    <LinkIncremental>
+    </LinkIncremental>
+    <ExtensionsToDeleteOnClean>*.bin;*.map;*.cdf;*.cache;*.obj;*.ilk;*.resources;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.tlog;*.manifest;*.res;*.pch;*.exp;*.idb;*.rep;*.xdc;*.pdb;*_manifest.rc;*.bsc;*.sbr;*.xml;*.metagen;*.bi</ExtensionsToDeleteOnClean>
+    <IgnoreImportLibrary />
+    <GenerateManifest />
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -269,22 +274,112 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MinSpace</Optimization>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
+      <IntrinsicFunctions>
+      </IntrinsicFunctions>
+      <SDLCheck>
+      </SDLCheck>
+      <PreprocessorDefinitions>
+      </PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <TreatWarningAsError />
+      <InlineFunctionExpansion />
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <EnableFiberSafeOptimizations />
+      <UndefineAllPreprocessorDefinitions />
+      <IgnoreStandardIncludePath />
+      <PreprocessToFile />
+      <PreprocessSuppressLineNumbers />
+      <PreprocessKeepComments />
+      <MinimalRebuild />
+      <ExceptionHandling />
+      <SmallerTypeCheck />
+      <BasicRuntimeChecks />
+      <RuntimeLibrary />
+      <StructMemberAlignment />
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet />
+      <FloatingPointModel />
+      <DisableLanguageExtensions />
+      <TreatWChar_tAsBuiltInType />
+      <ForceConformanceInForLoopScope />
+      <PrecompiledHeaderOutputFile />
+      <ExpandAttributedSource />
+      <AssemblerOutput>AssemblyCode</AssemblerOutput>
+      <ProgramDataBaseFileName />
+      <GenerateXMLDocumentationFiles />
+      <BrowseInformation />
+      <CallingConvention />
+      <CompileAs>CompileAsC</CompileAs>
+      <ShowIncludes />
+      <UseFullPaths />
+      <OmitDefaultLibName>true</OmitDefaultLibName>
+      <ErrorReporting />
+      <AdditionalOptions>/analyze- </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>
+      </GenerateDebugInformation>
+      <ShowProgress />
+      <RegisterOutput />
+      <PerUserRedirection />
+      <ManifestFile />
+      <UACExecutionLevel />
+      <UACUIAccess />
+      <MapExports />
+      <SwapRunFromCD />
+      <SwapRunFromNET />
+      <ProfileGuidedDatabase />
+      <TypeLibraryResourceID />
+      <NoEntryPoint />
+      <RandomizedBaseAddress />
+      <TurnOffAssemblyGeneration />
+      <Profile />
+      <AdditionalDependencies>$(IntDir)\AdjustStack.obj</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <AllowIsolation />
+      <EnableUAC />
+      <ProgramDatabaseFile />
+      <GenerateMapFile>true</GenerateMapFile>
+      <FunctionOrder>function_link_order64.txt</FunctionOrder>
+      <IgnoreEmbeddedIDL />
+      <EntryPointSymbol>Begin</EntryPointSymbol>
+      <DataExecutionPrevention />
+      <LinkErrorReporting />
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs />
+    </ProjectReference>
+    <Manifest>
+      <SuppressStartupBanner />
+    </Manifest>
+    <Manifest>
+      <VerboseOutput />
+    </Manifest>
+    <PreBuildEvent>
+      <Command>ml64 /nologo /c /Cx /Fo $(ProjectDir)$(IntDir)AdjustStack.obj $(ProjectDir)AdjustStack.asm</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Build AdjustStack.asm</Message>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>powershell.exe -NoProfile -ExecutionPolicy Bypass -File $(SolutionDir)lib\PowerShell\Out-Shellcode.ps1 $(OutDir)$(TargetName)$(TargetExt) $(ProjectDir) $(OutDir)$(TargetName).map $(OutDir)$(TargetName)_shellcode.bin</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Extract position independent shellcode</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="64BitHelper.h" />
