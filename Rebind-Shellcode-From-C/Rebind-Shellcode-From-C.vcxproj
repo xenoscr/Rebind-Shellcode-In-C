@@ -39,7 +39,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -84,7 +84,7 @@
     </LinkIncremental>
     <ExtensionsToDeleteOnClean>*.bin;*.map;*.cdf;*.cache;*.obj;*.obj.enc;*.ilk;*.ipdb;*.iobj;*.resources;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.tlog;*.manifest;*.res;*.pch;*.exp;*.idb;*.rep;*.xdc;*.pdb;*_manifest.rc;*.bsc;*.sbr;*.xml;*.metagen;*.bi</ExtensionsToDeleteOnClean>
     <IgnoreImportLibrary />
-    <GenerateManifest />
+    <GenerateManifest>false</GenerateManifest>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -174,8 +174,7 @@
       <Optimization>MinSpace</Optimization>
       <FunctionLevelLinking>
       </FunctionLevelLinking>
-      <IntrinsicFunctions>
-      </IntrinsicFunctions>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
       <SDLCheck>
       </SDLCheck>
       <PreprocessorDefinitions>
@@ -185,10 +184,11 @@
       </PrecompiledHeaderFile>
       <DebugInformationFormat>None</DebugInformationFormat>
       <TreatWarningAsError />
-      <InlineFunctionExpansion />
+      <InlineFunctionExpansion>
+      </InlineFunctionExpansion>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
-      <OmitFramePointers />
-      <EnableFiberSafeOptimizations />
+      <OmitFramePointers>false</OmitFramePointers>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
       <UndefineAllPreprocessorDefinitions />
       <IgnoreStandardIncludePath />
       <PreprocessToFile />
@@ -198,7 +198,7 @@
       <ExceptionHandling />
       <SmallerTypeCheck />
       <BasicRuntimeChecks />
-      <RuntimeLibrary />
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <StructMemberAlignment />
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <EnableEnhancedInstructionSet />
@@ -218,17 +218,18 @@
       <UseFullPaths />
       <OmitDefaultLibName>true</OmitDefaultLibName>
       <ErrorReporting />
+      <AdditionalOptions>/</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>
-      </GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <ShowProgress />
       <RegisterOutput />
       <PerUserRedirection />
-      <AdditionalDependencies />
+      <AdditionalDependencies>
+      </AdditionalDependencies>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <ManifestFile />
       <AllowIsolation />
@@ -244,7 +245,7 @@
       <ProfileGuidedDatabase />
       <IgnoreEmbeddedIDL />
       <TypeLibraryResourceID />
-      <EntryPointSymbol>StartHere</EntryPointSymbol>
+      <EntryPointSymbol>forkProcess</EntryPointSymbol>
       <NoEntryPoint />
       <RandomizedBaseAddress />
       <DataExecutionPrevention />
@@ -252,6 +253,8 @@
       <Profile />
       <LinkErrorReporting />
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -323,7 +326,8 @@
       <UseFullPaths />
       <OmitDefaultLibName>true</OmitDefaultLibName>
       <ErrorReporting />
-      <AdditionalOptions>/analyze- </AdditionalOptions>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
